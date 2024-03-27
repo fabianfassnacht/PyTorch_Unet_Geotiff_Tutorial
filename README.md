@@ -8,7 +8,7 @@ It will cover all steps from setting-up a Python environment, to tiling the trai
 
 The code for the U-net segmentation was adapted from the very helpful Tutorial provided by pyimagesearch that can be found here:
 
-[Original u-net tutorial](https://pyimagesearch.com/2021/11/08/u-net-training-image-segmentation-models-in-pytorch/)
+[Original u-net tutorial](https://pyimagesearch.com/2021/11/08/u-net-training-image-segmentation-models-in-pytorch/blob/main/Figures_Readme/Fig_01.png)
 
 The main modifications that are implemented here were motivated by two main points: 1. to make the code work with remote sensing data in which the scaling of the pixel values (which is often automatically occurring when working with for example PNG-files) is often not a sound option (since remote sensing data are not just images but physical measurements of radiance or reflectance) 2. to maintain the geo-coding of the remote sensing data by modifying the code to allow geo-tiff files as input data.
 
