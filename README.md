@@ -119,11 +119,11 @@ In Spyder we will now have to make sure that Spyder uses the environment we just
 
 **Tools => Preferences** (Figure 2)
 
-Insert Figure 02. 
+![Figure 2](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_02.png)
 
 This should lead to the situation shown in Figure 3. Now we have to select the menu-point **"Python-Interpreter"** on the left (marked in red) and then select use the navigation button on the right side (marked in red and with number 1 in Figure 3) to navigate to and select the **"Python.exe"**  executable file located in the Python environment we have just created. 
 
-Insert Figure 03. 
+![Figure 3](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_03.png)
 
 We confirm by clicking "ok" and then restart Spyder by closing the program and re-opening it. If everything went smootly, Spyder should now be connected with the fastai_ff Python environment.
 
@@ -132,7 +132,7 @@ Be aware that your environment and the corresponding Python.exe will most likely
 **Part 2: Setting-up a folder structure**  
 Following the original tutorial of pyimagesearch we will set-up a folder stucture that helps us to organize the different python-code files as well as input and output files. For this we will open the Windows Explorer and then use the "right-click" => New => Folder option to create a folder structure that looks as shown in Figure 4.
 
-Insert Figure 04. 
+![Figure 4](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_04.png)
 
 That means in our main folder (here called "my_unet" - but feel free to name it differently) we create three subfolders:
 
@@ -164,7 +164,7 @@ into the folder named "**pyimagesearch**". On the other hand, the two files
 
 should be placed in the main folder ("**my_unet**"). Your folder structure should hence look like in Figure 5 in the end.
 
-Insert Figure 05. 
+![Figure 5](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_05.png)
 
 
 **Part 3: Overview of the deep-learning work-flow**  
