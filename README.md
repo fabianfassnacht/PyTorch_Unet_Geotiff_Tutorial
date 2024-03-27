@@ -216,7 +216,17 @@ You will have to adapt these paths according to where you stored the files on yo
 	# load necessaries packages
 	library(terra)
 	library(sf)
-	
+
+	# !!!!! define the tile size
+	# the tile size will define how large the tiles you will feed into
+	# the deep learning algorithm are. The tile size does have an effect on
+	# the way the algorithm learns and is hence one of the parameters you can
+	# adjust. the larger the value you chose, the larger the tiles will be 
+	# and the less tiles you will create. In this example the tile size would be
+	# 200 by 200 pixels
+	tile_pix = 200
+
+ 
 	# !!!!! load the paths to all image-subsets overlapping with the 
 	# reference polygons 
 	fils <- list.files("D:/5_pytorch/pre_processing/raster/", pattern=".tif$", full.names = T)
@@ -245,14 +255,8 @@ You will have to adapt these paths according to where you stored the files on yo
 	  # current image subset	  
 	  studarea <- ext(parakou)
 	  
-	  # !!!!! define the tile size
-	  # the tile size will define how large the tiles you will feed into
-	  # the deep learning algorithm are. The tile size does have an effect on
-	  # the way the algorithm learns and is hence one of the parameters you can
-	  # adjust. the larger the value you chose, the larger the tiles will be 
-	  # and the less tiles you will create. In this example the tile size would be
-	  # 128 by 128 pixels
-	  tilesize = 128*res_ras
+	  # get tile size for clipping (number of pixels times spatial resolution)
+	  tilesize = tile_pix*res_ras
 	  
 	  # create the corder-coordinates of the tiles
 	  xsteps <- seq(studarea[1], studarea[2], tilesize)
@@ -263,7 +267,7 @@ You will have to adapt these paths according to where you stored the files on yo
 	  for (i1 in 1:(length(xsteps)-1)){
 	    for (i2 in 1:(length(ysteps)-1)){
 	      
-				# compose the extent of the current tile	      
+	      # compose the extent of the current tile	      
 	      clipext <- ext(xsteps[i1], xsteps[i1+1], ysteps[i2], ysteps[i2+1])
 	      
 	      # crop the image to the current tile extent
@@ -273,7 +277,10 @@ You will have to adapt these paths according to where you stored the files on yo
 	      
 	      # crop the reference polygon file to the extent of current tile
 	      mask_dummy <- crop(tree, clipext)
-	         
+	      # get dummy image for checking for NAs (see below)
+	      img3 <- img2
+	      img3[img3==0] <- NA
+	  
 	      # check if the cropped polygon file contains any polygons
 	      # if this is not the case:   
 	      if (length(mask_dummy) == 0) {
@@ -281,7 +288,7 @@ You will have to adapt these paths according to where you stored the files on yo
 	        # copy one band of the current tile
 	        mask <- img[[1]]
 	        # set all values of the band to 0 (no reference polygon)
-	        values(mask) <- 0
+	        values(mask) <- NA
 	        
 	      # if it is the case   
 	      } else {
@@ -289,14 +296,23 @@ You will have to adapt these paths according to where you stored the files on yo
 	        # copy one band of the current tile
 	        mask2 <- img[[1]]
 	        # set all values of the band to 0 
-	        values(mask2) <- 0
+	        values(mask2) <- NA
 	        # then rasterie the polygon objects into the 
 	        # raster file
 	        mask <- rasterize(mask_dummy,mask2)
-	        mask[mask==1]<-1
+	        mmask[is.na(mask)]<-0.0
 	        plot(mask)
 	      }
-	      
+
+	      # check how many na-pixels the image has and if more than 5% of the image
+	      # are na-pixels, don't save the image
+	      if (sum(is.na(values(img3)))>tile_pix*tile_pix*0.05){
+	        
+	        print("image dropped")
+	        next
+	
+	      } else {
+       
 	      # !!!!! set the output path for the image tiles
 	      setwd("D:/5_pytorch/pre_processing/imgs")
 	      # compile an output filename
@@ -310,12 +326,12 @@ You will have to adapt these paths according to where you stored the files on yo
 	      maskname <- paste0("mask", u,"_", i1, "_", i2, ".tif")
 	      # save the file to the harddisc
 	      writeRaster(mask, file = maskname)
-	      	      
+	      }  
 	    }
 	    # print id of current iteration of current image-subset
 	    print(i1)
     }
-	}
+}
 
 
  If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 9, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial.
