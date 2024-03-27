@@ -334,7 +334,7 @@ You will have to adapt these paths according to where you stored the files on yo
 }
 
 
- If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 9, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial.
+If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 9, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial. The R-code includes an if-else statement that will check how many pixels in each tile are NA. If there is an image with more than 5% NAs (for example because it is located at the edge of the satellite image) the image and the corresponding mask will not be saved.
  
 Insert Figure 09
 
