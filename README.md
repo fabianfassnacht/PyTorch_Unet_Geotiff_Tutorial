@@ -354,7 +354,7 @@ In the following we will now have a closer look at each file of the three buildi
 
 **Part 7: Detailed explanation of the building blocks of the Python-Workflow**
 
-!!!!! Be aware that if you copy the code below instead of using the provided files, you might end up having to fix the intends in your Python editor since sometimes the formatting is not preserved and intends to have a meaning in Python .
+!!!!! Be aware that if you copy the code below instead of using the provided files, you might end up having to fix the intends in your Python editor since sometimes the formatting is not preserved and intends do have a meaning in Python .
 
 ***config.py***
 
