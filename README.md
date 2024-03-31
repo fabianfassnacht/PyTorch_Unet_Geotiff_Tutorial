@@ -1,4 +1,4 @@
-## **U-net segmentation of remote sensing data with PyTorch**
+﻿## **U-net segmentation of remote sensing data with PyTorch**
 
 **Introduction** 
 
@@ -8,7 +8,7 @@ It will cover all steps from setting-up a Python environment, to tiling the trai
 
 The code for the U-net segmentation was adapted from the very helpful Tutorial provided by pyimagesearch that can be found here:
 
-[Original u-net tutorial](Figures_Readme/Fig_01.png)
+[Original u-net tutorial](https://pyimagesearch.com/2021/11/08/u-net-training-image-segmentation-models-in-pytorch/)
 
 The main modifications that are implemented here were motivated by two main points: 1. to make the code work with remote sensing data in which the scaling of the pixel values (which is often automatically occurring when working with for example PNG-files) is often not a sound option (since remote sensing data are not just images but physical measurements of radiance or reflectance) 2. to maintain the geo-coding of the remote sensing data by modifying the code to allow geo-tiff files as input data.
 
@@ -17,6 +17,7 @@ The author of this tutorial is a long-time R-user and new to Python and also to 
 The python-files required to run the Tutorial can be found here:
 
 enter github link
+![enter image description here](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_01.png)
 
 Feel free to send me comments if you have suggestions on how to improve the tutorial! fabian [d0t] fassnacht [at] fu-berlin.de
 
@@ -170,7 +171,7 @@ should be placed in the main folder ("**my_unet**"). Your folder structure shoul
 **Part 3: Overview of the deep-learning work-flow**  
 A rough overview over the deep-learning work-flow we will learn today is summarized in Figure 6. The presented principle is somewhat unique to remote sensing data since it involves a tiling-step which is not always needed in deep-learning based image analysis.
 
-Insert Figure 06. 
+![Figure 6](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_06.png)
 
 The whole work-flow is subdivided into steps:
 
@@ -216,17 +217,7 @@ You will have to adapt these paths according to where you stored the files on yo
 	# load necessaries packages
 	library(terra)
 	library(sf)
-
-	# !!!!! define the tile size
-	# the tile size will define how large the tiles you will feed into
-	# the deep learning algorithm are. The tile size does have an effect on
-	# the way the algorithm learns and is hence one of the parameters you can
-	# adjust. the larger the value you chose, the larger the tiles will be 
-	# and the less tiles you will create. In this example the tile size would be
-	# 200 by 200 pixels
-	tile_pix = 200
-
- 
+	
 	# !!!!! load the paths to all image-subsets overlapping with the 
 	# reference polygons 
 	fils <- list.files("D:/5_pytorch/pre_processing/raster/", pattern=".tif$", full.names = T)
@@ -255,8 +246,14 @@ You will have to adapt these paths according to where you stored the files on yo
 	  # current image subset	  
 	  studarea <- ext(parakou)
 	  
-	  # get tile size for clipping (number of pixels times spatial resolution)
-	  tilesize = tile_pix*res_ras
+	  # !!!!! define the tile size
+	  # the tile size will define how large the tiles you will feed into
+	  # the deep learning algorithm are. The tile size does have an effect on
+	  # the way the algorithm learns and is hence one of the parameters you can
+	  # adjust. the larger the value you chose, the larger the tiles will be 
+	  # and the less tiles you will create. In this example the tile size would be
+	  # 128 by 128 pixels
+	  tilesize = 128*res_ras
 	  
 	  # create the corder-coordinates of the tiles
 	  xsteps <- seq(studarea[1], studarea[2], tilesize)
@@ -267,7 +264,7 @@ You will have to adapt these paths according to where you stored the files on yo
 	  for (i1 in 1:(length(xsteps)-1)){
 	    for (i2 in 1:(length(ysteps)-1)){
 	      
-	      # compose the extent of the current tile	      
+				# compose the extent of the current tile	      
 	      clipext <- ext(xsteps[i1], xsteps[i1+1], ysteps[i2], ysteps[i2+1])
 	      
 	      # crop the image to the current tile extent
@@ -277,10 +274,7 @@ You will have to adapt these paths according to where you stored the files on yo
 	      
 	      # crop the reference polygon file to the extent of current tile
 	      mask_dummy <- crop(tree, clipext)
-	      # get dummy image for checking for NAs (see below)
-	      img3 <- img2
-	      img3[img3==0] <- NA
-	  
+	         
 	      # check if the cropped polygon file contains any polygons
 	      # if this is not the case:   
 	      if (length(mask_dummy) == 0) {
@@ -288,7 +282,7 @@ You will have to adapt these paths according to where you stored the files on yo
 	        # copy one band of the current tile
 	        mask <- img[[1]]
 	        # set all values of the band to 0 (no reference polygon)
-	        values(mask) <- NA
+	        values(mask) <- 0
 	        
 	      # if it is the case   
 	      } else {
@@ -296,23 +290,14 @@ You will have to adapt these paths according to where you stored the files on yo
 	        # copy one band of the current tile
 	        mask2 <- img[[1]]
 	        # set all values of the band to 0 
-	        values(mask2) <- NA
+	        values(mask2) <- 0
 	        # then rasterie the polygon objects into the 
 	        # raster file
 	        mask <- rasterize(mask_dummy,mask2)
-	        mmask[is.na(mask)]<-0.0
+	        mask[mask==1]<-1
 	        plot(mask)
 	      }
-
-	      # check how many na-pixels the image has and if more than 5% of the image
-	      # are na-pixels, don't save the image
-	      if (sum(is.na(values(img3)))>tile_pix*tile_pix*0.05){
-	        
-	        print("image dropped")
-	        next
-	
-	      } else {
-       
+	      
 	      # !!!!! set the output path for the image tiles
 	      setwd("D:/5_pytorch/pre_processing/imgs")
 	      # compile an output filename
@@ -326,15 +311,15 @@ You will have to adapt these paths according to where you stored the files on yo
 	      maskname <- paste0("mask", u,"_", i1, "_", i2, ".tif")
 	      # save the file to the harddisc
 	      writeRaster(mask, file = maskname)
-	      }  
+	      	      
 	    }
 	    # print id of current iteration of current image-subset
 	    print(i1)
     }
-}
+	}
 
 
-If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 9, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial. The R-code includes an if-else statement that will check how many pixels in each tile are NA. If there is an image with more than 5% NAs (for example because it is located at the edge of the satellite image) the image and the corresponding mask will not be saved.
+ If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 9, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial.
  
 Insert Figure 09
 
@@ -354,7 +339,7 @@ In the following we will now have a closer look at each file of the three buildi
 
 **Part 7: Detailed explanation of the building blocks of the Python-Workflow**
 
-!!!!! Be aware that if you copy the code below instead of using the provided files, you might end up having to fix the intends in your Python editor since sometimes the formatting is not preserved and intends do have a meaning in Python .
+!!!!! Be aware that if you copy the code below instead of using the provided files, you might end up having to fix the intends in your Python editor since sometimes the formatting is not preserved and intends to have a meaning in Python .
 
 ***config.py***
 
@@ -657,16 +642,27 @@ As next step we define data transformation and set-up the dataloaders. Data tran
 
 We are now almost ready to train our model. To be able to do this, we have to initiate our model which is stored in the model.py. We do this by running the code below. Be aware that we again call the config.py file to obtain several settings to set-up our model. 
 
+	# Assuming you have a binary segmentation task with 
+	# foreground and background
+	# pos_weight should be calculated based on the class 
+	# imbalance in your dataset
+	# For example, if foreground/background ratio is 1:4, 
+	# pos_weight should be 4.0 - be aware that the 
+	# tensor is also transformed to a cuda-tensor here to 
+	# make the code work
+	pos_weight = torch.tensor([4]).cuda()
 	# initialize our UNet model
 	unet = UNet().to(config.DEVICE)
 	# initialize loss function and optimizer
-	lossFunc = BCEWithLogitsLoss()
+	lossFunc = BCEWithLogitsLoss(pos_weight = pos_weight)
 	opt = Adam(unet.parameters(), lr=config.INIT_LR)
 	# calculate steps per epoch for training and test set
 	trainSteps = len(trainDS) // config.BATCH_SIZE
 	testSteps = len(testDS) // config.BATCH_SIZE
 	# initialize a dictionary to store training history
 	H = {"train_loss": [], "test_loss": []}
+
+One important parameter to consider while initiating the model is whether we want to apply positive weights or not. This is important if the target class covers notably more or notably less of the images than the background. If we apply a positive weight > 1, we will give more weight to target class when calculating the loss function. This is important since if we for example assume that our target class only makes up 10% of the whole image while the background covers 90%, then classifying the whole image as background would give us an accuracy of 90% but we would still have a completely useless output. So playing around with the positive weights may have quite a strong effect on the model performance.
 
 If the model is successfully initalized, we can start the actual training process with the code below. The core-part of the code consists of a loop where each iteration of the loop corresponds to an epoch of training of the model. An epoch ends after the training process has processed all image tiles of the training dataset once to update the weights of the neural network. The image tiles are not processed all toghether at once but in subgroups (batches) of a user-defined batch-size (which has to be defined in the config.py file). This process can take quite a long time, depending on the what kind of hardware you are using and which tile-size (and hence sample size) you defined. Python will constantly you update on the process by telling you how many epochs are completed and how the tesst and the train loss develops (Figure X).
 
@@ -939,8 +935,84 @@ Once all the prediction maps are successfully created, we use a final R-script t
 
 **Part 12:  Exploring the results in QGIS**
 
+Once you have created the output files (which will be geotiffs as well) you can load them in QGIS along with the original image files and compare the prediction maps with the original image files. In ideal case, all pixels in the image representing trees should have higher values than the other classes in the prediction maps. Figure XX gives an example of a prediction map where the trees were detected fairly well (as seen when comparing the prediction map with the corresponding image tile). On the right hand, we can see a binary mask that was derived from the prediction map by applying a threshold.
 
+Insert Figure XX
 
 **Part 13: How to improve the results**
 
+There are various parameters which you can modify to improve the results of your model. Some of the most common ones are the following:
+
+1. Increase the number of training data (always helpful)
+2. Change the tile size
+3. Change the number of epochs
+4. Adapt the positive weights of the loss function BCEWithLogitsLoss (the value you chose very much depends on your dataset and how frequent the target class is against the background)
+5. Change the loss function (no example provided but in the given example, something like "Intersection over Union" may lead to better results)
+6. In some cases, your mask files may wrongly prepared and the model fails to learn something - I had some corresponding troubles with nan-values and 0 values. The current code should account for this by transforming nan-values to 0 but you might still want to double-check in case you do not get meaningful results.
+7. Finally there are options to use pre-trained models and other model architectures, but these may of course require notably different code and major adaptations.
+
 **Part 14: Running the work-flow in Google Colab**
+
+For running the work-flow of this tutorial in Google Colab, you will need a Google account. If you have a Google account, you can automatically use the base version of Google Colab which is free of cost and which allows you to use computing resources (including GPUs) free of charge (at least if no longer run-times are required).
+
+The procedure to implement the whole tutorial on Google Colab is as follows:
+
+1. Run the pre-processing to create the image tiles and masks on your local computer
+2. Prepare the folder structure as explained above (with image tiles and corresponding mask files already placed in their folders)
+3. Upload the whole folder structure including the building-block Python-code files to your google drive and remember to which paths you have uploaded it.
+4. Then open Google Colab using this link: [Google Colab start page](https://colab.google/) 
+5. Open a new notebook
+6. In this notebook you can copy the code-lines of the train.py file but you will have to add a few lines of code above to mount your google drive:
+		
+		# mount Google drive to access files of the Tutorial
+		from google.colab import drive
+		drive.mount('/content/drive/')
+
+	Once you run this code, Google will ask you to grant access to your Google drive and you will have to accept this to proceed.
+
+	Since you are now in a new Python environment (and no longer in the one we prepared at the beginning of the Tutorial) you will have also install some packages:
+
+		!pip install rasterio
+		!pip install imutils
+
+	The packages will then be installed within the Python environment of Google Colab. You don't have to install Pytorch and some other packages as they are already pre-installed in the Colab-environment.
+
+	Then, the only thing you still have to do is to adapt the paths, both in the code of the train.py file that you copy&pasted to the Colab notebook and also in the config.py that you have uploaded to your google drive. You might have to delete the file and re-upload it after updating the paths. 
+
+	As an example - if you have uploaded the folder structure to a folder named "0_Tutorial_Colab" which is directly positioned in the base-folder of your google drive, the corresponding code to switch the current path of the Python session to this folder will be:
+
+		# import the necessary packages
+		import os
+		os.chdir('/content/drive/MyDrive/0_Tutorial_Colab/')
+
+7. One more important advice: The standard Colab session will be using a run-time with only a CPU - if you want to run the work-flow of this Tutorial you will have to use a GPU run-time. You can do this by clicking "connection" (Figure XX - 1) on the top right and then "change run-time"  (Figure XX - 2) and in the now appearing window select the "GPU" option. Be aware that in the cost-free version of Colab, the access to GPUs is limited and you might only be able to get access at certain time-points and for limited hours.
+
+Insert Figure XX
+
+8. Once you have trained the model successfully, you can either download the model (this is the file with an ending of .pth) and then proceed offline using your own computer or by also copy & pasting the code in the "03_predict.. .py" file to the Notebook. You just have to make sure that you indeed updated all relevant paths. The predicted files will be saved to the output folder in your folder structure on the Google Drive. 
+
+**Part 15: Trouble-shooting**
+
+While developing this tutorial I came across various issues that prevented the code from running. Some of them quite plausible, others hard to understand. In case you have troubles getting to the code to run, here are some potential problems which you can work on:
+
+1. If the model starts training but gets stuck in the first epoch and is not making any progress for several hours, it is likely that the hardware of your computer is not sufficient to run the code. Interestingly, in my case this was sometimes hard to explain since neither the PC's memory nor the GPU memory were maxed out. One example was the following: If I switch the tile size from 256 pixels to 128 pixels (and thereby quadruple the amount of samples available for training) the actual size of the dataset is not increased, but the sample size is. If I left all other settings unchanged, the model did not start learning on my small workstation with a NVIDIA xxx GPU. When uploading the data to Google Colab, the code ran with exactly the same inputs.
+2. Another odd issue I observed and which occurred arbitrarily was that code the building block codes (dataset_tif.py, config.py and model.py) could not be loaded in the moment when Python splits the work-tasks to multiple jobs. The error message was that the corresponding package/module cannot be found. In my case, the problem was often fixed by simply renaming the folder in which the building block code-files were stored and adapting the corresponding codes of line which load the files:
+
+		# be aware that you are here loading the building blocks from the 
+		# other python files
+		from pyimagesearch.dataset import SegmentationDataset
+		from pyimagesearch.model import UNet
+		from pyimagesearch import config
+
+So in this example, the files are saved in a folder named "pyimagesearch" - if I got the corresponding error, I renamed the folder to for example "pybblocks" and adapted the code accordingly:
+
+		# be aware that you are here loading the building blocks from the 
+		# other python files
+		from pybblocks.dataset import SegmentationDataset
+		from pybblocks.model import UNet
+		from pybblocks import config
+
+This makes absolutely no sense to me, but fixed the problem most of the time.
+
+3. It is important to always remember that Pytorch uses different tensors for processing the data on a CPU and a GPU. The whole tutorial is written for a GPU and will most likely not work on a machine that only has a CPU. If you do not have a GPU on your local machine, consider using for example Google Colab.
+
