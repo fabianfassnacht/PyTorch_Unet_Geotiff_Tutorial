@@ -82,11 +82,11 @@ for (u in 1:length(fils)){
 
       } else {
         
-        setwd("D:/0_Tutorial\2_training_data")
+        setwd("D:/0_Tutorial/2_training_data/imgs")
         imgname <- paste0("img", u, "_", i1, "_", i2, ".tif")
         writeRaster(img2, file=imgname)
         
-        setwd("D:/0_Tutorial\2_training_data")
+        setwd("D:/0_Tutorial/2_training_data/masks")
         maskname <- paste0("mask", u,"_", i1, "_", i2, ".tif")
         writeRaster(mask, file = maskname)
         
