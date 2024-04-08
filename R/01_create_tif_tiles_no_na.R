@@ -8,10 +8,10 @@ library(sf)
 tile_pix = 200
 
 # get input raster files (matching the extent of the delineated tree polygons)
-fils <- list.files("D:/5_pytorch/pre_processing/0_data/raster/", pattern=".tif$", full.names = T)
+fils <- list.files("D:/0_Tutorial/0_data/raster/", pattern=".tif$", full.names = T)
 
 # get reference polygons (containing delineated trees)
-tree <- vect("D:/5_pytorch/pre_processing/0_data/shape/Trees.shp")
+tree <- vect("D:/0_Tutorial//0_data/shape/Trees.shp")
 
 # start looping through the raster files
 for (u in 1:length(fils)){
@@ -82,11 +82,11 @@ for (u in 1:length(fils)){
 
       } else {
         
-        setwd("D:/5_pytorch/pre_processing/imgs")
+        setwd("D:/0_Tutorial\2_training_data")
         imgname <- paste0("img", u, "_", i1, "_", i2, ".tif")
         writeRaster(img2, file=imgname)
         
-        setwd("D:/5_pytorch/pre_processing/masks")
+        setwd("D:/0_Tutorial\2_training_data")
         maskname <- paste0("mask", u,"_", i1, "_", i2, ".tif")
         writeRaster(mask, file = maskname)
         
