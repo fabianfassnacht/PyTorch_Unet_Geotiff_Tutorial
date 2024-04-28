@@ -193,7 +193,7 @@ into the folder named "**pyimagesearch**". The two files
 
 should be placed in the main folder ("**0_Tutorial**"). Your folder structure should hence look like in Figure 5 in the end.
 
-![Figure 5](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_05.png)
+![Figure 5](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_05a.png)
 
 
 **Part 3: Overview of the deep-learning work-flow**  
