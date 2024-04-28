@@ -137,16 +137,21 @@ Be aware that your environment and the corresponding Python.exe will most likely
 **Part 2: Setting-up a folder structure**  
 Following the original tutorial of pyimagesearch we will set-up a folder stucture that helps us to organize the different python-code files as well as input and output files. For this we will open the Windows Explorer and then use the "right-click" => New => Folder option to create a folder structure that looks as shown in Figure 4.
 
-![Figure 4](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_04.png)
+![Figure 4](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_04a.png)
 
 That means in our main folder (here called "my_unet" - but feel free to name it differently) we create seven subfolders:
 
-**"0_data"
-"1_prediction_data"
-"2_training_data"
-"3_output"
-"4_predict_comp"
-"pyimagesearch"**
+**"0_data"**
+
+**"1_prediction_data"**
+
+**"2_training_data"**
+
+**"3_output"**
+
+**"4_predict_comp"**
+
+**"pyimagesearch"**
 
 The subfolder 0_data has two subfolders named 
 
