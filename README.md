@@ -18,7 +18,7 @@ The python-files required to run the Tutorial can be found here:
 
 [Python codes](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/tree/main/Python)
 
-WHile the R-codes can be found here:
+While the R-codes can be found here:
 
 [R codes](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/tree/main/R)
 
@@ -48,7 +48,7 @@ The tutorial is structured as follows:
 
 **Part 1: Setting-up the Python environment and Spyder**
 
-In Python it is common to set-up environments within which the actual coding and development is accomplished. The idea of an environment is that you install the packages and drivers that you need for your work in sort of a " independent copy" of the original Python installation. The advantage of doing this is that you can have various Python versions and combinations of packages and drivers at the same time. This allows you to ensure that a running work-flow is not corrupted by installing a new package or another Python version you need for another work-flow.
+In Python it is common to set-up environments within which the actual coding and development is accomplished. The idea of an environment is that you install the packages and drivers that you need for your work in sort of an " independent copy" of the original Python installation. The advantage of doing this is that you can have various Python versions and combinations of packages and drivers at the same time. This allows you to ensure that a running work-flow is not corrupted by installing a new package or another Python version you need for another work-flow.
 
 This tutorial works with Anaconda/Miniconda distribution of Python and the set-up of the environment will be described accordingly. As editor we will use Spyder which is delivered with Anaconda/Miniconda. You can download Miniconda here:
 
@@ -58,7 +58,7 @@ As first step we will create the environment using the Anaconda prompt. You can 
 
 ![Figure 1](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_01.png)
 
-in the now opening command line window you will have to execute several commands. **In some cases, it will be necessary to confirm by pressing the "y" button and enter**. You will find the comments that you have to execute below. Only enter the lines of code **without** the leading # - these lines provide some information to better understand the code. 
+in the now opening command line window you will have to execute several commands. **In some cases, it will be necessary to confirm by pressing the "y" button and enter**. You will find the commands that you have to execute below. Only enter the lines of code **without** the leading # - these lines provide some information to better understand the code. 
 
     # create and activate conda environment using the anaconda 
     # prompt - be aware that we install a specific version of 
@@ -93,7 +93,7 @@ in the now opening command line window you will have to execute several commands
     
     conda install spyder-kernels=2.4
     conda install rasterio
-		conda install imutils
+    conda install imutils
 
 If you want to check whether your installation was successful, you can run some additional lines of commands within the currently active environment and quickly train a deep learning model. To do this, you can run the following lines:
 
