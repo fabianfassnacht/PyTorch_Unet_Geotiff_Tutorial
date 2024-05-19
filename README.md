@@ -129,7 +129,7 @@ In Spyder we will now have to make sure that Spyder uses the environment we just
 
 ![Figure 2](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_02.png)
 
-This should lead to the situation shown in Figure 3. Now we have to select the menu-point **"Python-Interpreter"** on the left (marked in red) and then select use the navigation button on the right side (marked in red and with number 1 in Figure 3) to navigate to and select the **"Python.exe"**  executable file located in the Python environment we have just created. 
+This should lead to the situation shown in Figure 3. Now we have to select the menu-point **"Python-Interpreter"** on the left (marked in red) and then use the navigation button on the right side (marked in red and with number 1 in Figure 3) to navigate to and select the **"Python.exe"**  executable file located in the Python environment we have just created. 
 
 ![Figure 3](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_03.png)
 
