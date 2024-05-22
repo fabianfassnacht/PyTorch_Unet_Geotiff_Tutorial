@@ -988,11 +988,28 @@ There are various parameters which you can modify to improve the results of your
 4. Adapt the positive weights of the loss function BCEWithLogitsLoss (the value you chose very much depends on your dataset and how frequent the target class is against the background)
 5. Change the loss function (no example provided but in the given example, something like "Intersection over Union" may lead to better results)
 6. In some cases, your mask files may wrongly prepared and the model fails to learn something - I had some corresponding troubles with nan-values and 0 values. The current code should account for this by transforming nan-values to 0 but you might still want to double-check in case you do not get meaningful results.
-7. Finally there are options to use pre-trained models and other model architectures, but these may of course require notably different code and major adaptations.
+7. You can adapt the kernel size of the unet - this is in our model done by modifying the following lines of the model.py script:
+
+	class Block(Module):
+	def __init__(self, inChannels, outChannels):
+		super().__init__()
+		# store the convolution and RELU layers
+		self.conv1 = Conv2d(inChannels, outChannels, 3)
+		self.relu = ReLU()
+		self.conv2 = Conv2d(outChannels, outChannels, 3)
+	def forward(self, x):
+		# apply CONV => RELU => CONV block to the inputs and return it
+		return self.conv2(self.relu(self.conv1(x)))
+
+To change the kernel size from 3 x 3 pixels to for example 11 x 11 pixels you have to change the functions "Conv2D(inChannels, outChannels, 3)" to "Conv2D(inChannels, outChannels, 11)"
+
+    
+9. Finally there are options to use pre-trained models and other model architectures, but these may of course require notably different code and major adaptations.
+   
 
 One important advice:
 
-To really understand whether your model is improving our not, the loss-values may in out example not be a good indicator since they for example depend on the applied positive weights and are hence not directly comparable between models trained with different positive weight settings.
+To really understand whether your model is improving our not, the loss-values may in our example not be a good indicator since they for example depend on the applied positive weights and are hence not directly comparable between models trained with different positive weight settings.
 
 From my experience, it is best to also have a look at the prediction maps and check whether the observed patterns are actually meaningful or not. In part 15 below, I provide some indications how you can make meaningful graphical model comparisons by keeping a complete hold-out set and make predictions of various trained models always on the same hold out set (never used during model training).
 
@@ -1060,6 +1077,18 @@ So in this example, the files are saved in a folder named "pyimagesearch" - if I
 This makes absolutely no sense to me, but fixed the problem most of the time.
 
 3. It is important to always remember that Pytorch uses different tensors for processing the data on a CPU and a GPU. The whole tutorial is written for a GPU and will most likely not work on a machine that only has a CPU. If you do not have a GPU on your local machine, consider using for example Google Colab.
+
+4. The scaling of the input images has an effect on the continuous prediction maps of the output images. In my case I tried out several cases including:
+- original Worldview-3 values (most pixel values ranging around 0-800)
+- original values divided by 10000 
+- original values divided by 2000
+
+With the original values, the output predictions look quite smooth
+
+When dividing the original values by 10000 the continuous prediction maps look quite artificial and distorted (showing some sort of gridded structures)
+
+With dividing the original values by 2000 the continuous predictions maps look relatively smooth again but a little less smooth than the original values
+
 
 
 
