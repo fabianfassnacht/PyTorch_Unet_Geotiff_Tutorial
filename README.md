@@ -225,7 +225,7 @@ This section was meant to give a first idea of the overall work-flow which we ho
 
 **Part 4:  Introduction of the dataset used in the tutorial **  
 
-In this tutorial we will make use of a WorldView-3 scene from the cities Parakou in Benin and Berlin in Germany. We will use a pan-sharpened image with three channels (Near-Infrared, Red, Green). An impression of the image quality is given in Figure 07 (left panel). On the right panel, we can see the same image extent but this time overlain with the training data that we will use in the tutorial (Figure 07 right panel). The training data consists of hand-drown polygons delineating tree crowns for some sub-parts of the areas covered by the WorldView-3 scene (Figure 08). Both, the WorldView-3 and the shapefile polygon of the dataset from have the coordinate reference system EPSG: 32631 while the data from Berlin has the coordinate reference system EPSG: 32633.
+In this tutorial we will make use of a WorldView-3 scene from the cities Parakou in Benin and Berlin in Germany. We will use a pan-sharpened image with three channels (Near-Infrared, Red, Green). An impression of the image quality is given in Figure 07 (left panel). On the right panel, we can see the same image extent but this time overlaid with the training data that we will use in the tutorial (Figure 07 right panel). The training data consists of hand-drawn polygons delineating tree crowns for some sub-parts of the areas covered by the WorldView-3 scene (Figure 08). Both, the WorldView-3 and the shapefile polygon of the dataset from have the coordinate reference system EPSG: 32631 while the data from Berlin has the coordinate reference system EPSG: 32633.
 
 For each of the sub-parts covered with the polygons, a separate subset of the WorldView-3 scene is provided. In the dataset you downloaded these are named: mask_01, mask_02, ..., mask_14. You can find the data in the folder: 
 
@@ -241,7 +241,7 @@ These datasets will serve as input to the pre-processing script in the next step
 
 **Part 5: Pre-processing of the datasets in R**  
 
-For creating the image-tiles in tif-format that can be used to train the unet in Python, we will use an R-script. In the script we will use the terra and sf packages. The script is provided below and I hope that the detailed comments in the script will be sufficient to understand what is happening. In order to run the script on your computer, you have to have downloaded the tutorial files provided above and put them in a folder which you are able to find on your PC. In the code below, the image files are stored in the path:
+For creating the image-tiles in tif-format that can be used to train the unet in Python, we will use an R-script. In the script we will use the terra and sf packages. The script is provided below and I hope that the detailed comments in the script will be sufficient to understand what is happening. In order to run the script on your computer, you have to have download the tutorial files provided above and put them in a folder which you are able to find on your PC. In the code below, the image files are stored in the path:
 
 **"D:/0_Tutorial/0_data/raster/"**
 
@@ -359,7 +359,7 @@ You will have to adapt these paths according to where you stored the files on yo
 	}
 
 
- If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 9, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial. 
+If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 9, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial. 
  
 **CAREFUL**: In many cases a .Rhistory file is saved in the masks folder. **Please delete this file** to make sure that the images and masks are correctly assigned to each other in later parts of the work-flow.
  
