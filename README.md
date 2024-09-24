@@ -16,11 +16,11 @@ The author of this tutorial is a long-time R-user and new to Python and also to 
 
 The python-files required to run the Tutorial can be found here:
 
-[Python codes](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/tree/main/Python)
+[Python codes](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/tree/main/Python_scripts)
 
 While the R-codes can be found here:
 
-[R codes](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/tree/main/R)
+[R codes](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/tree/main/R_scripts)
 
 A complete prepared folder structure in a zip-file including training data tiles can be found here:
 
