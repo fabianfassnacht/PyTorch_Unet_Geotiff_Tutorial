@@ -215,11 +215,11 @@ The whole work-flow is subdivided into seven main steps:
 
 **Train Convolutional Neural Network (CNN) algorithm** - once we have the tiles prepared, we are ready to train the deep learning algorithm. In this tutorial we will apply a so-called unet which is a classical convolutional neural network that was found to perform well on many segmentation tasks in image analysis. Segmentation refers to the automatic delineation of the class of interest in the remote sensing images as compared to object detection where the object is not delineated but only its location determined and in some cases a bounding box around the object will be provided.
 
-**Apply algorithm on tiles** - once we have trained the network we can predict the algorithm to the entire image. For this we will have to again create tiles as the algorithm can only applied to data that has the same input as it has been trained with. This time we can tile the entire image. Due to some reasons explained further below, it can be recommendable to create overlapping tiles.
+**Apply algorithm on tiles** - once we have trained the network we can predict the algorithm to the entire image. For this we will have to again create tiles as the algorithm can only applied to data that has the same structure as the data it has been trained with. This time we can tile the entire image. Due to some reasons explained further below, it can be recommendable to create overlapping tiles.
 
 **Re-mosaic tiles** - as the last step, we will have to re-mosaic all prediction maps of the tiles but this is a quite straightforward automated process. If we used overlapping tiles, we have to tell the mosaicing function how we want to handle areas where multiple values are available. A straightforward solution could be to simply apply a mean or a max function.
 
-**Apply threshold** - in this tutorial, our unet will provide us continuous values representing the likelihood that each pixel in a tile represents the object of interest. That is, in order to create a prediction mask, we will have to apply a threshold as final step. 
+**Apply threshold** - in this tutorial, our unet will provide us continuous values representing the likelihood that each pixel in a tile represents the object of interest. That is, in order to create a prediction mask, we will have to apply a threshold as final step. Finding the optimal threshold can also be automatized using a performance metric such as "Intersection over Union".
 
 This section was meant to give a first idea of the overall work-flow which we hope will be helpful to be able to follow the more detailed processing steps following below.
 
