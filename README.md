@@ -80,7 +80,7 @@ in the now opening command line window you will have to execute several commands
     # pytorch - the main package we will use for the deep 
     # learning, we also install fastai and some additional
     # packages which may become handy at a later point in time.
-    # this also includes NVIDIA drivers for the case that you 
+    # this also includes NVIDIA drivers for the case that your 
     # computer has a GPU
     
     conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
@@ -177,6 +177,7 @@ The subfolder 3_output_data has three subfolders named
 "1_training_output"
 "2_predictions"
 "3_continuos_predictions"
+"4_prediction_maps"
 
 The subfolder 4_predict_comp has two subfolders named 
 
