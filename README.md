@@ -136,6 +136,16 @@ This should lead to the situation shown in Figure 3. Now we have to select the m
 
 We confirm by clicking "ok" and then restart Spyder by closing the program and re-opening it. If everything went smootly, Spyder should now be connected with the fastai_ff Python environment.
 
+If this leads to an error message, you can try to open spyder directly from the anaconda prompt by starting the anaconda prompt as explained above and then running the following lines:
+
+	conda activate fastai_ff
+ 	spyder
+
+If this leads to an error message it could be that spyder was not installed yet for this Python environment and you might have to run:
+
+	conda install spyder 
+
+
 Be aware that your environment and the corresponding Python.exe will most likely be at a different location. In my case, I created the environment in an own folder which is reserved for this ("E:/Python_environments). If you did not make any specifications, your environment was most likely be created in the standard folder for Python-environments which should be specified in the Anaconda Navigator. If you have troubles finding the folder, you may simply want to use the search function of the Windows Explorer and enter the name you gave to your environment.
 
 **Part 2: Setting-up a folder structure**  
