@@ -94,7 +94,7 @@ in the now opening command line window you will have to execute several commands
     
     conda install spyder-kernels=2.5
     conda install rasterio
-    conda install imutils
+    conda install -c conda-forge imutils
 
 If you want to check whether your installation was successful, you can run some additional lines of commands within the currently active environment and quickly train a deep learning model. To do this, you can run the following lines:
 
