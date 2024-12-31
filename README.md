@@ -91,7 +91,7 @@ in the now opening command line window you will have to execute several commands
     # our environment and another one that we will need later 
     # in the work-flow
     
-    conda install spyder-kernels=2.4
+    conda install spyder-kernels=2.5
     conda install rasterio
     conda install imutils
 
