@@ -67,9 +67,10 @@ in the now opening command line window you will have to execute several commands
     # latest Python version which is often not compatible with
     # some packages.
     # The only thing you may want to adapt here is the name of 
-    # the environment - it is "fastai_ff " in my case.
+    # the environment and the path - the name is "fastai_ff " in my case
+    # and I install the environment to the folder "E:/Python_environments/"
     
-    conda create --name fastai_ff python=3.11.5
+    conda create --prefix E:/Python_environments/fastai_ff python=3.11.5
     
     # as next step we will activate the environment we just 
     # created
