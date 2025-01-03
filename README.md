@@ -1207,7 +1207,7 @@ In the example above, the threshold for obtaining the final classification map w
 	plot(seq(1,1000,1), res[,2])
 	# get threshold leading to highest IoU value
 	best <- which(res[,2] == max(res[,2]))
-	res[best]
+	res[best,2]
 	th[best]
 
 	# apply threshold of highest IoU value
