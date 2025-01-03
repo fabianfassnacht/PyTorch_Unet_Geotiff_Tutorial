@@ -59,7 +59,8 @@ This tutorial works with the Anaconda/Miniconda distribution of Python and the s
 As first step we will create the environment using the Anaconda prompt. You can open the Anaconda prompt by typing "Anaconda" into the windows search bar (Figure 1).
 
 ![Figure 1](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_01.png)
-Figure 1
+
+**Figure 1**
 
 in the now opening command line window you will have to execute several commands. **In some cases, it will be necessary to confirm by pressing the "y" button and enter**. You will find the commands that you have to execute below. Only enter the lines of code **without** the leading # - these lines provide some information to better understand the code. 
 
@@ -137,9 +138,13 @@ In Spyder we will now have to make sure that Spyder uses the environment we just
 
 ![Figure 2](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_02.png)
 
+**Figure 2**
+
 This should lead to the situation shown in Figure 3. Now we have to select the menu-point **"Python-Interpreter"** on the left (marked in red) and then use the navigation button on the right side (marked in red and with number 1 in Figure 3) to navigate to and select the **"Python.exe"**  executable file located in the Python environment we have just created. 
 
 ![Figure 3](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_03.png)
+
+**Figure 3**
 
 We confirm by clicking "ok" and then restart Spyder by closing the program and re-opening it. If everything went smootly, Spyder should now be connected with the fastai_ff Python environment.
 
@@ -158,6 +163,8 @@ Be aware that your environment and the corresponding Python.exe will most likely
 Following the original tutorial of pyimagesearch we will set-up a folder stucture that helps us to organize the different python-code files as well as input and output files. For this we will open the Windows Explorer and then use the "right-click" => New => Folder option to create a folder structure that looks as shown in Figure 4.
 
 ![Figure 4](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/Fig_04a.png)
+
+**Figure 4**
 
 That means in our main folder (here called "my_unet" - but feel free to name it differently) we create seven subfolders:
 
@@ -219,6 +226,8 @@ A rough overview over the deep-learning work-flow we will learn today is summari
 
 ![Figure 6](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure_06.png)
 
+**Figure 5**
+
 The whole work-flow is subdivided into seven main steps:
 
 **Acquire remote sensing data** - this typically are very high resolution satellite data or airborne data
@@ -239,10 +248,12 @@ This section was meant to give a first idea of the overall work-flow which we ho
 
 **Part 4:  Introduction of the dataset used in the tutorial **  
 
-In this tutorial we will make use of a WorldView-3 scene from the city Parakou in Benin. We will use a pan-sharpened image with three channels (Near-Infrared, Red, Green). An impression of the image quality is given in Figure 07 (top panel). On the right panel, we can see the same image extent but this time overlaid with the training data that we will use in the tutorial (Figure 07 bottom panel). The training data consists of hand-drawn polygons delineating tree crowns for some sub-parts of the areas covered by the entire WorldView-3 scene. Both, the WorldView-3 and the shapefile polygon of the dataset from have the coordinate reference system EPSG: 32631.
+In this tutorial we will make use of a WorldView-3 scene from the city Parakou in Benin. We will use a pan-sharpened image with three channels (Near-Infrared, Red, Green). An impression of the image quality is given in Figure 07 (top panel). On the right panel, we can see the same image extent but this time overlaid with the training data that we will use in the tutorial (Figure 6 bottom panel). The training data consists of hand-drawn polygons delineating tree crowns for some sub-parts of the areas covered by the entire WorldView-3 scene. Both, the WorldView-3 and the shapefile polygon of the dataset from have the coordinate reference system EPSG: 32631.
 
 
 ![Figure 7](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure7.png)
+
+**Figure 6**
 
 For each of the sub-parts covered with the polygons, a separate subset of the WorldView-3 scene is provided. In the dataset you downloaded these are named: WV3pan_cir_extra1, WV3pan_cir_extra2, ..., WV3pan_cir_extra24. You can find the data in the folder: 
 
@@ -377,13 +388,14 @@ You will have to adapt these paths according to where you stored the files on yo
 	}
 
 
-If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 8, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial. 
+If everything runs smoothly, this processing step will take a while and you should end up with a situation as shown in Figure 7, that is a folder containing the image tiles and one folder containing the corresponding mask files. The two folder should have the same amount of files and order of files. Otherwise, the mask-files are not correctly linked to the image files in later steps of the tutorial. 
  
 **CAREFUL**: In many cases a .Rhistory file is saved in the masks folder. **Please delete this file** to make sure that the images and masks are correctly assigned to each other in later parts of the work-flow.
  
 
-![Figure 8](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure08.png)
+![Figure 7](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure08.png)
 
+**Figure 7**
 
 **Part 6: Overview of the building blocks of the Python-Workflow and the involved scripts** 
 
@@ -764,12 +776,15 @@ If the model is successfully initialized, we can start the actual training proce
 	print("[INFO] total time taken to train the model: {:.2f}s".format(
 		endTime - startTime))
 
-![Figure 9](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure09.png)
+![Figure 8](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure09.png)
+
+**Figure 8**
+
 We can save the final model by running:
 
 	torch.save(unet, config.MODEL_PATH)
 
-After, the model training has ended, the model has been saved to the hard disc we can have a look at the development of the training and test loss of the epochs. The plot resulting from the code below should look like the one shown in Figure 10.
+After, the model training has ended, the model has been saved to the hard disc we can have a look at the development of the training and test loss of the epochs. The plot resulting from the code below should look like the one shown in Figure 9.
 	
 	# plot the training loss
 	plt.style.use("ggplot")
@@ -787,6 +802,8 @@ After, the model training has ended, the model has been saved to the hard disc w
 
 
 ![Figure 10](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure10.png)
+
+**Figure 9**
 
 **Part 9: Predicting to individual tiles**  
 
@@ -873,13 +890,17 @@ Once the function is defined we can apply it to the test tiles. The predicted fi
 		# make predictions and visualize the results
 		make_predictions(unet, path) 
 
-The prediction files created with this work-flow contain continuous values that represent the probability that a certain pixel belongs to the target class (in our case trees). We can open the created prediction tiles in QGIS and compare them to original image tiles to see if the predictions are reasonable. It might be necessary to adapt the visualization settings to get a clearer view of the quality of the image. When loading the prediction images, QGIS in some cases does not detect the coordinate reference system, but if you set it to EPSG: 32631 by clicking the button marked in red in Figure 11, the image tiles should have a correct geolocation and be overlapping with the original image tiles. 
+The prediction files created with this work-flow contain continuous values that represent the probability that a certain pixel belongs to the target class (in our case trees). We can open the created prediction tiles in QGIS and compare them to original image tiles to see if the predictions are reasonable. It might be necessary to adapt the visualization settings to get a clearer view of the quality of the image. When loading the prediction images, QGIS in some cases does not detect the coordinate reference system, but if you set it to EPSG: 32631 by clicking the button marked in red in Figure 10, the image tiles should have a correct geolocation and be overlapping with the original image tiles. 
 
-![Figure 11](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure_11.png)
+![Figure 10](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure_11.png)
 
-To make the comparison between the predictions of the unet model and the original image tiles and masks more comfortable, I provide an R script (07_plot_comparison.R) that can be used to create images as shown in Figure 12. I will not go into details here but the script simply needs as input the original image tiles (of the few test files), the corresponding mask files as well as the prediction image tiles. The corresponding data should be stored in the "5_predict_comp" folder and wherever you have stored the prediction images created in the last step above.
+**Figure 10**
+
+To make the comparison between the predictions of the unet model and the original image tiles and masks more comfortable, I provide an R script (07_plot_comparison.R) that can be used to create images as shown in Figure 11. I will not go into details here but the script simply needs as input the original image tiles (of the few test files), the corresponding mask files as well as the prediction image tiles. The corresponding data should be stored in the "5_predict_comp" folder and wherever you have stored the prediction images created in the last step above.
 
 ![Figure 12](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure_12.png)
+
+**Figure 11**
 
 **Part 10: Prediction to continuous areas**  
 
@@ -1000,9 +1021,11 @@ In Part 16 below, I provide some information on how to use the intersection over
 
 **Part 12:  Exploring the results in QGIS**
 
-Once you have created the output files (which will be geotiffs as well) you can load them in QGIS along with the original image files and compare the prediction maps with the original image files. In ideal case, all pixels in the image representing trees should have higher values than the other classes in the prediction maps. Figure 13 gives an example of a part of the prediction map where the trees were detected fairly well. In the top panel you can see the continuous output of the Unet-algorithm, in the middle you can see the original image and in the bottom image you can see the results after applying a threshold identified visually with QGIS.
+Once you have created the output files (which will be geotiffs as well) you can load them in QGIS along with the original image files and compare the prediction maps with the original image files. In ideal case, all pixels in the image representing trees should have higher values than the other classes in the prediction maps. Figure 13 gives an example of a part of the prediction map where the trees were detected fairly well. In the top panel you can see the continuous output of the Unet-algorithm, in the middle you can see the original image and in the bottom image you can see the results after applying a threshold identified visually with QGIS (Figure 12)).
 
-![Figure 13](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure13.png)
+![Figure 12](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure13.png)
+
+**Figure 12**
 
 **Part 13: How to improve the results**
 
@@ -1073,10 +1096,11 @@ The procedure to implement the whole tutorial on Google Colab is as follows:
 		import os
 		os.chdir('/content/drive/MyDrive/0_Tutorial_Colab/')
 
-7. One more important advice: The standard Colab session will be using a run-time with only a CPU - if you want to run the work-flow of this Tutorial you will have to use a GPU run-time. You can do this by clicking "connection" (Figure XX - 1) on the top right and then "change run-time"  (Figure XX - 2) and in the now appearing window select the "GPU" option. Be aware that in the cost-free version of Colab, the access to GPUs is limited and you might only be able to get access at certain time-points and for limited hours.
-
+7. One more important advice: The standard Colab session will be using a run-time with only a CPU - if you want to run the work-flow of this Tutorial you will have to use a GPU run-time. You can do this by clicking "connection" (Figure 13 - left) on the top right and then "change run-time type"  (Figure 13 - right) and in the now appearing window select the "GPU" option. Be aware that in the cost-free version of Colab, the access to GPUs is limited and you might only be able to get access at certain time-points and for limited hours.
 
 ![Figure 14](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure_14.png)
+
+**Figure 13**
 
 8. Once you have trained the model successfully, you can either download the model (this is the file with an ending of .pth) and then proceed offline using your own computer or by also copy & pasting the code in the "03_predict.. .py" file to the Notebook. You just have to make sure that you indeed updated all relevant paths. The predicted files will be saved to the output folder in your folder structure on the Google Drive. 
 
