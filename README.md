@@ -393,7 +393,7 @@ If everything runs smoothly, this processing step will take a while and you shou
 **CAREFUL**: In many cases a .Rhistory file is saved in the masks folder. **Please delete this file** to make sure that the images and masks are correctly assigned to each other in later parts of the work-flow.
  
 
-![Figure 7](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure08.png)
+![Figure 7](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure_08.png)
 
 **Figure 7**
 
