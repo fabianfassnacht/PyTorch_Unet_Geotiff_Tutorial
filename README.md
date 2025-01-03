@@ -26,7 +26,7 @@ While the R-codes can be found here:
 
 A complete prepared folder structure in a zip-file including training data tiles can be found here:
 
-[enter Google Drive Link](https://drive.google.com/file/d/1KlrMSaWJa6Nk0gY4m4NmO3SS9ibp97bo/view?usp=sharing)
+[Download files](https://drive.google.com/file/d/1KlrMSaWJa6Nk0gY4m4NmO3SS9ibp97bo/view?usp=sharing)
 
 Feel free to send me comments if you have suggestions on how to improve the tutorial! fabian [d0t] fassnacht [at] fu-berlin.de
 
