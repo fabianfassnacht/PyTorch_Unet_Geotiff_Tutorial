@@ -776,7 +776,7 @@ If the model is successfully initialized, we can start the actual training proce
 	print("[INFO] total time taken to train the model: {:.2f}s".format(
 		endTime - startTime))
 
-![Figure 8](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure09.png)
+![Figure 8](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure10.png)
 
 **Figure 8**
 
@@ -801,7 +801,7 @@ After, the model training has ended, the model has been saved to the hard disc w
 
 
 
-![Figure 10](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure10.png)
+![Figure 10](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure09.png)
 
 **Figure 9**
 
