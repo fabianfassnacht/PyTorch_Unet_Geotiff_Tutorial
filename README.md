@@ -874,11 +874,11 @@ Once the function is defined we can apply it to the test tiles. The predicted fi
 
 The prediction files created with this work-flow contain continuous values that represent the probability that a certain pixel belongs to the target class (in our case trees). We can open the created prediction tiles in QGIS and compare them to original image tiles to see if the predictions are reasonable. It might be necessary to adapt the visualization settings to get a clearer view of the quality of the image. When loading the prediction images, QGIS in some cases does not detect the coordinate reference system, but if you set it to EPSG: 32631 by clicking the button marked in red in Figure 11, the image tiles should have a correct geolocation and be overlapping with the original image tiles. 
 
-![Figure 11](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure11.png)
+![Figure 11](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure_11.png)
 
 To make the comparison between the predictions of the unet model and the original image tiles and masks more comfortable, I provide an R script (07_plot_comparison.R) that can be used to create images as shown in Figure 12. I will not go into details here but the script simply needs as input the original image tiles (of the few test files), the corresponding mask files as well as the prediction image tiles. The corresponding data should be stored in the "5_predict_comp" folder and wherever you have stored the prediction images created in the last step above.
 
-![Figure 12](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure12.png)
+![Figure 12](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/blob/main/Figures_Readme/figure_12.png)
 
 **Part 10: Prediction to continuous areas**  
 
