@@ -16,7 +16,7 @@ The main modifications that are implemented here were motivated by two main poin
 
 The author of this tutorial is a long-time R-user and new to Python and also to deep learning. So some of the newly introduced Python-code parts may be unnecessarily complicated.  Furthermore, pre- and post-processing steps were mostly implemented in R. So you will have to use both environments. It is assumed that you have R and RStudio already set-up and the packages "terra" and "sf" installed. The work-flow was developed on a Windows 11-Computer (HP Elite Tower 800 G9 Desktop PC - 12th Gen Intel Core i9-12900, 2400 Mhz, 16 cores) with a NVIDIA GeForce RTX 3060 GPU and 128 GB RAM.
 
-The python-files required to run the Tutorial can be found here:
+The python-files required to run the Tutorial can be found here (some minor differences between the uploaded files and the versions shown in the text below may occur):
 
 [Python codes](https://github.com/fabianfassnacht/PyTorch_Unet_Geotiff_Tutorial/tree/main/Python_scripts)
 
