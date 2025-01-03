@@ -1144,7 +1144,7 @@ With dividing the original values by 2000 the continuous predictions maps look r
 **Part 16: Obtaining an optimal threshold for the final prediction map** 
 
 
-In the example above, the threshold for obtaining the final classification map was obtained visually by using the info button and then estimating what could be a good threshold. This can also be done in a more systematic way by comparing the performance of a large number of thresholds applied to the continuous output of the unet-algorithm. In the following we use the reference mask of a single (hold-out) tile and compare it to binary masks created with 1000 different thresholds applied to the unet-prediction for the corresponding image. As shown in Figure 15 this leads to a quite plausible (not perfect) result (-3.26), which also agrees well with the visually identified threshold above (which was -3.3).
+In the example above, the threshold for obtaining the final classification map was obtained visually by using the info button and then estimating what could be a good threshold. This can also be done in a more systematic way by comparing the performance of a large number of thresholds applied to the continuous output of the unet-algorithm. In the following we use the reference mask of a single (hold-out) tile and compare it to binary masks created with 1000 different thresholds applied to the unet-prediction for the corresponding image. As shown in Figure 14 this leads to a quite plausible (not perfect) result (-3.26), which also agrees well with the visually identified threshold above (which was -3.3).
 
 	require(terra)
 	require(caret)
